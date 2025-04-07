@@ -31,9 +31,9 @@ class RegisterController extends Controller
      */
     // protected $redirectTo = '/home';
     protected function redirectTo()
-        {
-            return Auth::user()->role === 'dokter' ? "/dokter" : "home";
-        }
+    {
+        return Auth::user()->role === 'dokter' ? "/dokter" : "home";
+    }
 
 
     /**
