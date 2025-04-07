@@ -7,6 +7,7 @@
 
     <section class="content">
         <div class="row">
+            <!-- Formulir untuk Menambah Obat -->
             <div class="col-md-6">
                 <div class="card card-primary">
                     <div class="card-header bg-primary">
@@ -17,15 +18,15 @@
                             @csrf
                             <div class="form-group">
                                 <label>Nama Obat</label>
-                                <input type="text" name="name_obat" class="form-control" placeholder="Input obat's name">
+                                <input type="text" name="name_obat" class="form-control" placeholder="Input nama obat">
                             </div>
                             <div class="form-group">
                                 <label>Kemasan</label>
-                                <input type="text" name="kemasan" class="form-control" placeholder="Input kemasan's name">
+                                <input type="text" name="kemasan" class="form-control" placeholder="Input nama kemasan">
                             </div>
                             <div class="form-group">
                                 <label>Harga</label>
-                                <input type="number" name="harga" class="form-control" placeholder="Input the price">
+                                <input type="number" name="harga" class="form-control" placeholder="Input harga obat">
                             </div>
                             <button type="submit" class="btn btn-primary">Tambah Obat</button>
                         </form>
@@ -33,6 +34,7 @@
                 </div>
             </div>
 
+            <!-- Daftar Obat -->
             <div class="col-md-12 mt-4">
                 <div class="card">
                     <div class="card-header">
@@ -63,26 +65,26 @@
                             <tbody>
                                 @php $i = 1; @endphp
                                 @foreach($obats ?? [] as $obat)
-                                <tr>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ 'B00' . $obat->id }}</td>
-                                    <td>{{ $obat->name_obat }}</td>
-                                    <td>{{ $obat->kemasan }}</td>
-                                    <td>{{ number_format($obat->harga) }}</td>
-                                    <td>
-                                        <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                        <form action="#" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger btn-sm">Hapus</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>{{ $i++ }}</td>
+                                        <td>{{ 'B00' . $obat->id }}</td>
+                                        <td>{{ $obat->name_obat }}</td>
+                                        <td>{{ $obat->kemasan }}</td>
+                                        <td>{{ number_format($obat->harga) }}</td>
+                                        <td>
+                                            <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="#" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-sm">Hapus</button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                 @endforeach
                                 @if(empty($obats) || $obats->isEmpty())
-                                <tr>
-                                    <td colspan="6" class="text-center">Belum ada data obat.</td>
-                                </tr>
+                                    <tr>
+                                        <td colspan="6" class="text-center">Belum ada data obat.</td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>
@@ -91,5 +93,4 @@
             </div>
         </div>
     </section>
-</div>
 @endsection

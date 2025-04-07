@@ -11,38 +11,39 @@
                 <h3 class="card-title">Riwayat Pemeriksaan Anda</h3>
             </div>
             <div class="card-body">
-                <table id="riwayatTable" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Dokter</th>
-                            <th>Tanggal Periksa</th>
-                            <th>Keluhan</th>
-                            <th>Diagnosa</th>
-                            <th>Obat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($riwayats as $i => $riwayat)
+                <div class="table-responsive"> <!-- Membungkus tabel dengan table-responsive untuk scroll -->
+                    <table id="riwayatTable" class="table table-bordered table-striped">
+                        <thead>
                             <tr>
-                                <td>{{ $i + 1 }}</td>
-                                <td>{{ $riwayat->dokter->nama }}</td>
-                                <td>{{ $riwayat->tanggal }}</td>
-                                <td>{{ $riwayat->keluhan }}</td>
-                                <td>{{ $riwayat->diagnosa }}</td>
-                                <td>
-                                    <ul>
-                                        @foreach($riwayat->obats as $obat)
-                                            <li>{{ $obat->nama }}</li>
-                                        @endforeach
-                                    </ul>
-                                </td>
+                                <th>#</th>
+                                <th>Dokter</th>
+                                <th>Tanggal Periksa</th>
+                                <th>Keluhan</th>
+                                <th>Diagnosa</th>
+                                <th>Obat</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach($riwayats as $i => $riwayat)
+                                <tr>
+                                    <td>{{ $i + 1 }}</td>
+                                    <td>{{ $riwayat->dokter->nama }}</td>
+                                    <td>{{ $riwayat->tanggal }}</td>
+                                    <td>{{ $riwayat->keluhan }}</td>
+                                    <td>{{ $riwayat->diagnosa }}</td>
+                                    <td>
+                                        <ul>
+                                            @foreach($riwayat->obats as $obat)
+                                                <li>{{ $obat->nama }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
-</div>
 @endsection
