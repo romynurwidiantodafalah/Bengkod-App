@@ -311,7 +311,7 @@ return [
         ],
 
         // Sidebar items:
-        ['header' =>  'Fitur'],
+        ['header' => 'Fitur'],
         [
             'text' => 'Periksa',
             'url' => 'admin/setting',
