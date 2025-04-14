@@ -1,5 +1,4 @@
 @extends('layouts.app')
-{{-- Customize layout sections --}}
 @section('subtitle', 'Dokter')
 @section('content_header_title', 'Obat')
 @section('content_body')
@@ -40,3 +39,4 @@
             </table>
         </div>
     </div>
+@endsection

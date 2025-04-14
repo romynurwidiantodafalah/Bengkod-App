@@ -12,7 +12,7 @@
                     <label for="nama">Kemasan</label>
                     {{-- ambil template option di bawah ini di adminLTE nya https://jeroennoten.github.io/Laravel-AdminLTE/ -> components -> basic form components --}}
                     <x-adminlte-select name="kemasan">
-                        <x-adminlte-options :options="['pill' => 'Pill', 'sachet' => 'Sachet', 'botol' => 'Botol']"
+                        <x-adminlte-options :options="['Pill' => 'Pill', 'Sachet' => 'Sachet', 'Botol' => 'Botol']"
                             empty-option="Pilih kemasan"/>
                     </x-adminlte-select>
                 </div>

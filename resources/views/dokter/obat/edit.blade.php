@@ -1,6 +1,4 @@
 @extends('layouts.app')
-
-
 @section('title', 'Edit Obat')
 @section('content_header')
     <div class="card-header">
