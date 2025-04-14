@@ -18,19 +18,19 @@ class UserSeeder extends Seeder
     {
         $data = [
         [
-            'name' => 'Romy1',
+            'name' => 'Romy',
             'alamat' => 'Jl ini',
             'no_hp' => '081234567',
             'role' => 'dokter',
-            'email' => 'romy1@gmail.com',
+            'email' => 'romy@gmail.com',
             'password' => '12341234'
         ],
 [
-            'name' => 'Romz1',
+            'name' => 'Romz',
             'alamat' => 'Jl itu',
             'no_hp' => '087654321',
             'role' => 'pasien',
-            'email' => 'romz1@gmail.com',
+            'email' => 'romz@gmail.com',
             'password' => '12341234'
         ],
         ];

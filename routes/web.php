@@ -15,29 +15,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/dokter', [HomeController::class, 'dokter'])-> name('dokter');
-
-
-Route::prefix('dokter')->group (function(){
-    Route::resource('obat', ObatController::class);
-    Route::resource('periksa', PeriksaController::class);
-});
-
-Route::prefix('dokter')->name('dokter.')->group(function () {
-    Route::post('/obat/store', [ObatController::class, 'store'])->name('obat.store');
-});
-
+Route::get('/dokter', [HomeController::class, 'dokter'])->name('dokter');
 
 // DOKTER
-Route::get('/dokter', fn() => view('dokter.index'))->name('dokter.dashboard');
-Route::get('/dokter/periksa', fn() => view('dokter.periksa.index'))->name('dokter.periksa');
-Route::get('/dokter/obat', fn() => view('dokter.obat.index'))->name('dokter.obat');
+Route::prefix('dokter')->name('dokter.')->group(function() {
+    Route::resource('obat', ObatController::class);
+    Route::resource('periksa', PeriksaController::class);
+    Route::get('/', fn() => view('dokter.index'))->name('dashboard');
+    Route::get('/periksa', fn() => view('dokter.periksa.index'))->name('periksa');
+});
 
 // PASIEN
 Route::get('/pasien', [PasienDashboardController::class, 'index'])->name('pasien.dashboard');
 Route::get('/pasien/periksa', [PasienPeriksaController::class, 'index'])->name('pasien.periksa.index');
 Route::post('/pasien/periksa', [PasienPeriksaController::class, 'store'])->name('pasien.periksa.store');
 Route::get('/pasien/riwayat', [PasienRiwayatController::class, 'index'])->name('pasien.riwayat.index');
-
-
-

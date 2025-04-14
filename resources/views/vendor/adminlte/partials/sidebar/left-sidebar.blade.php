@@ -22,12 +22,6 @@
                 {{-- Menu untuk Dokter --}}
                 @if(auth()->check() && auth()->user()->role == 'dokter')
                 <li class="nav-item">
-                    <a href="/dokter" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="/dokter/periksa" class="nav-link {{ request()->is('dokter/periksa') ? 'active' : '' }}">
                     <i class="fas fa-stethoscope nav-icon"></i>
                     <p>Periksa</p>
@@ -55,7 +49,7 @@
                 <li class="nav-item">
                     <a href="/pasien/riwayat" class="nav-link {{ request()->is('pasien/riwayat') ? 'active' : '' }}">
                     <i class="fas fa-history nav-icon"></i>
-                    <p>Riwayat Periksa</p>
+                    <p>Riwayat</p>
                     </a>
                 </li>
                 @endif
