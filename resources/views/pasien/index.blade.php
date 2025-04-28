@@ -1,35 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="content-header">
-        <h1>Dokter <small>Dashboard</small></h1>
-    </section>
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+<section class="content-header">
+    <h1>Pasien <small>Dashboard</small></h1>
+</section>
 
-    <section class="content">
-        <div class="row">
-            @php
-                $info = [
-                    ['title' => 'Jumlah Riwayat Periksa', 'count' => 2, 'bg' => 'info'],
-                    ['title' => 'Bounce Rate', 'count' => '70%', 'bg' => 'success'],
-                    ['title' => 'User Registrations', 'count' => 5, 'bg' => 'warning'],
-                    ['title' => 'Unique Visitors', 'count' => 10, 'bg' => 'danger']
-                ];
-            @endphp
-
-            @foreach($info as $box)
-                <div class="col-lg-3 col-6">
-                    <div class="small-box bg-{{ $box['bg'] }}">
-                        <div class="inner">
-                            <h3>{{ $box['count'] }}</h3>
-                            <p>{{ $box['title'] }}</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-            @endforeach
+<section class="content">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title">Ringkasan Pemeriksaan Terbaru</h3>
         </div>
-    </section>
+        <div class="card-body">
+            @if($latestPeriksa)
+                <p><strong>ID Pemeriksaan:</strong> {{ $latestPeriksa->id }}</p>
+                <p><strong>Tanggal Periksa:</strong> {{ \Carbon\Carbon::parse($latestPeriksa->tgl_periksa)->format('d-m-Y') }}</p>
+                <p><strong>Catatan:</strong> {{ $latestPeriksa->catatan }}</p>
+                <p><strong>Diagnosa:</strong> {{ $latestPeriksa->diagnosa ?? 'Belum ada diagnosa' }}</p>
+                <p><strong>Biaya Periksa:</strong> Rp {{ number_format($latestPeriksa->biaya_periksa, 0, ',', '.') }}</p>
+            @else
+                <p>Belum ada pemeriksaan yang tercatat.</p>
+            @endif
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header bg-secondary text-white">
+            <h3 class="card-title">Riwayat Pemeriksaan</h3>
+        </div>
+        <div class="card-body">
+            @if($periksas->count() > 0)
+                <a href="{{ route('pasien.riwayat.index') }}" class="btn btn-info">Lihat Riwayat Pemeriksaan</a>
+            @else
+                <p>Tidak ada riwayat pemeriksaan.</p>
+            @endif
+        </div>
+    </div>
+</section>
 @endsection

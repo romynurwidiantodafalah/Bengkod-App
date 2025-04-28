@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('id_periksa')->constrained('periksas')->onDelete('cascade');
-            $table->foreignId('id_obat')->constrained('obats')->nullable();
+            $table->foreignId('id_obat')->constrained('obats')->onDelete('cascade');
+            $table->decimal('biaya_periksa', 15, 2)->nullable();
         });
     }
 
