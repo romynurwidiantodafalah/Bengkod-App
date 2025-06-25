@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="content-header">
-    <h1>Daftar Poli</h1>
+    <h1>Periksa</h1>
 </section>
 
 <section class="content">
@@ -137,7 +137,7 @@
                 data.forEach(jadwal => {
                     const option = document.createElement('option');
                     option.value = jadwal.id;
-                    option.textContent = `${jadwal.hari}, ${jadwal.jam_mulai} - ${jadwal.jam_selesai} (Dr. ${jadwal.dokter})`;
+                    option.textContent = `${jadwal.hari}, ${jadwal.jam_mulai} - ${jadwal.jam_selesai} (${jadwal.dokter})`;
                     jadwalSelect.appendChild(option);
                 });
             });

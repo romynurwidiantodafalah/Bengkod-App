@@ -19,7 +19,7 @@
                                 <th>Tanggal</th>
                                 <th>Dokter</th>
                                 <th>Poli</th>
-                                <th>Diagnosa</th>
+                                <th>Keluhan</th>
                                 <th>Catatan</th>
                                 <th>Obat</th>
                             </tr>

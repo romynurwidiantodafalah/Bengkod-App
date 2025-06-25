@@ -21,13 +21,16 @@ class PasienController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6',
             'alamat' => 'required|string',
-            'no_hp' => 'required|string',
-            'no_ktp' => 'required|string',
+            'no_hp' => 'required|digits_between:10,15|regex:/^[0-9]+$/',
+            'no_ktp' => 'required|digits:16|unique:users,no_ktp',
         ]);
 
         // Generate no_rm otomatis, misal: RM00123
-        $lastId = \App\Models\User::where('role', 'pasien')->max('id') ?? 0;
-        $no_rm = 'RM' . str_pad($lastId + 1, 5, '0', STR_PAD_LEFT);
+        // $lastId = \App\Models\User::where('role', 'pasien')->max('id') ?? 0;
+        // $no_rm = 'RM' . str_pad($lastId + 1, 5, '0', STR_PAD_LEFT);
+        
+        $count = \App\Models\User::where('role', 'pasien')->count();
+        $no_rm = 'RM' . str_pad($count + 1, 5, '0', STR_PAD_LEFT);
 
         \App\Models\User::create([
             'name' => $validated['name'],
@@ -52,21 +55,21 @@ class PasienController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
-            'no_ktp' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
+            'name'    => 'required|string',
+            'alamat'  => 'required|string',
+            'no_hp'   => 'required|digits_between:10,15|regex:/^[0-9]+$/',
+            'no_ktp'  => 'required|digits:16|regex:/^[0-9]+$/',
+            'email'   => 'required|email|unique:users,email,' . $id,
         ]);
 
         $pasien = User::findOrFail($id);
 
         $pasien->update([
-            'name' => $request->name,
-            'alamat' => $request->alamat,
-            'no_hp' => $request->no_hp,
-            'email' => $request->email,
-            'no_ktp' => $request->no_ktp,
+            'name'    => $request->name,
+            'alamat'  => $request->alamat,
+            'no_hp'   => $request->no_hp,
+            'email'   => $request->email,
+            'no_ktp'  => $request->no_ktp,
         ]);
 
         return redirect()->route('admin.pasien.index')->with('success', 'Data pasien berhasil diperbarui.');

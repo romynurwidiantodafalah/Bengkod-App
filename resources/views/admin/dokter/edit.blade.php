@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label>No HP</label>
-                <input name="no_hp" class="form-control" value="{{ $dokter->no_hp }}" required>
+                <input name="no_hp" class="form-control" value="{{ $dokter->no_hp }}" required inputmode="numeric" pattern="[0-9]*" maxlength="15">
             </div>
             <div class="form-group">
                 <label>Email</label>

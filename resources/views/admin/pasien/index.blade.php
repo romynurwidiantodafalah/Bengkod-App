@@ -1,13 +1,16 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Manajemen Pasien')
+
+@section('content_header')
+    <h1>Manajemen Pasien</h1>
+@endsection
 
 @section('content')
-<div class="content-header"><h4>Manajemen Pasien</h4></div>
-
 @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
 @endif
 
-{{-- Form Tambah Pasien --}}
 <div class="card card-primary">
     <div class="card-header">Tambah Pasien</div>
     <form method="POST" action="{{ route('admin.pasien.store') }}">
@@ -22,12 +25,12 @@
                 <input name="alamat" class="form-control" required>
             </div>
             <div class="form-group">
-                <label>No. KTP</label>
-                <input name="no_ktp" class="form-control" required>
+                <label>No KTP</label>
+                <input name="no_ktp" class="form-control" required pattern="[0-9]*" inputmode="numeric" maxlength="16">
             </div>
             <div class="form-group">
-                <label>No. HP</label>
-                <input name="no_hp" class="form-control" required>
+                <label>No HP</label>
+                <input name="no_hp" class="form-control" required pattern="[0-9]*" inputmode="numeric" maxlength="15">
             </div>
             <div class="form-group">
                 <label>Email</label>
@@ -45,36 +48,37 @@
     </form>
 </div>
 
-{{-- Tabel Pasien --}}
+{{-- Tabel Data Pasien --}}
 <div class="card mt-4">
     <div class="card-header">Data Pasien</div>
     <div class="card-body">
         <table class="table table-bordered">
-            <thead><tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>No. KTP</th>
-                <th>No. HP</th>
-                <th>No. RM</th>
-                <th>Email</th>
-                <th>Aksi</th>
-            </tr></thead>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>No RM</th>
+                    <th>Nama</th>
+                    <th>Alamat</th>
+                    <th>No KTP</th>
+                    <th>No HP</th>
+                    <th>Email</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
             <tbody>
                 @foreach($pasiens as $pasien)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <td>{{ $pasien->no_rm }}</td>
                         <td>{{ $pasien->name }}</td>
                         <td>{{ $pasien->alamat }}</td>
                         <td>{{ $pasien->no_ktp }}</td>
                         <td>{{ $pasien->no_hp }}</td>
-                        <td>{{ $pasien->no_rm }}</td>
                         <td>{{ $pasien->email }}</td>
                         <td>
                             <a href="{{ route('admin.pasien.edit', $pasien->id) }}" class="btn btn-sm btn-warning">Edit</a>
                             <form action="{{ route('admin.pasien.destroy', $pasien->id) }}" method="POST" style="display:inline;">
-                                @csrf 
-                                @method('DELETE')
+                                @csrf @method('DELETE')
                                 <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
                             </form>
                         </td>

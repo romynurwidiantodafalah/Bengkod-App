@@ -38,7 +38,7 @@ class DokterController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6',
             'alamat' => 'required|string',
-            'no_hp' => 'required|string',
+            'no_hp' => 'required|numeric|digits_between:10,15',
             'id_poli' => 'required|exists:polis,id',
         ]);
 
