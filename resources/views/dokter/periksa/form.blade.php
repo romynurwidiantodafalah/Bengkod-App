@@ -9,11 +9,18 @@
     @csrf
     <div class="card">
         <div class="card-body">
-            <p><strong>Nama Pasien:</strong> {{ $periksa->pasien->name }}</p>
-            <p><strong>Keluhan:</strong> {{ $periksa->catatan }}</p>
+            <div class="form-group">
+                <label>Nama Pasien</label>
+                <input type="text" class="form-control" value="{{ $periksa->pasien->name }}" readonly>
+            </div>
 
             <div class="form-group">
-                <label>Diagnosa</label>
+                <label>Keluhan</label>
+                <input type="text" class="form-control" value="{{ $periksa->catatan }}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Catatan</label>
                 <textarea name="diagnosa" class="form-control" required></textarea>
             </div>
 
@@ -43,7 +50,7 @@
 </form>
 @endsection
 
-@push('js')
+@section('js')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const hargaTetap = 75000;
@@ -68,7 +75,7 @@
             cb.addEventListener('change', updateHarga);
         });
 
-        updateHarga(); // Jalankan saat halaman pertama kali terbuka
+        updateHarga(); // Jalankan saat halaman pertama kali dibuka
     });
 </script>
-@endpush
+@endsection

@@ -56,6 +56,8 @@
 </script>
 @endpush
 
+@stack('js')
+
 {{-- Add common CSS customizations --}}
 
 @push('css')

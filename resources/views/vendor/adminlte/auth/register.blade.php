@@ -55,6 +55,60 @@
             @enderror
         </div>
 
+        {{-- Alamat --}}
+        <div class="input-group mb-3">
+            <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror"
+                value="{{ old('alamat') }}" placeholder="Alamat">
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-map-marker-alt {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+
+            @error('alamat')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
+        {{-- No KTP --}}
+        <div class="input-group mb-3">
+            <input type="text" name="no_ktp" class="form-control @error('no_ktp') is-invalid @enderror"
+                value="{{ old('no_ktp') }}" placeholder="No KTP">
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-id-card {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+
+            @error('no_ktp')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
+        {{-- No HP --}}
+        <div class="input-group mb-3">
+            <input type="text" name="no_hp" class="form-control @error('no_hp') is-invalid @enderror"
+                value="{{ old('no_hp') }}" placeholder="No HP">
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-phone {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+
+            @error('no_hp')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
         {{-- Password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"

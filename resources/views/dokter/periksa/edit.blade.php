@@ -2,26 +2,36 @@
 
 @section('content')
 <div class="content-header">
-    <h4>Form Pemeriksaan Pasien</h4>
+    <h4>Edit Pemeriksaan Pasien</h4>
 </div>
 
-<form method="POST" action="{{ route('dokter.periksa.store', $periksa->id) }}">
+<form method="POST" action="{{ route('dokter.periksa.update', $periksa->id) }}">
     @csrf
+    @method('PUT')
     <div class="card">
         <div class="card-body">
-            <p><strong>Nama Pasien:</strong> {{ $periksa->pasien->name }}</p>
-            <p><strong>Keluhan:</strong> {{ $periksa->catatan }}</p>
+            <div class="form-group">
+                <label>Nama Pasien</label>
+                <input type="text" class="form-control" value="{{ $periksa->pasien->name }}" readonly>
+            </div>
 
             <div class="form-group">
-                <label>Diagnosa</label>
-                <textarea name="diagnosa" class="form-control" required></textarea>
+                <label>Keluhan</label>
+                <textarea class="form-control" readonly>{{ $periksa->catatan }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Catatan (Diagnosa)</label>
+                <textarea name="catatan" class="form-control" required>{{ old('catatan', $periksa->catatan) }}</textarea>
             </div>
 
             <div class="form-group">
                 <label>Obat</label>
                 @foreach($obats as $obat)
                     <div class="form-check">
-                        <input class="form-check-input obat-checkbox" type="checkbox" name="obat_id[]" value="{{ $obat->id }}" id="obat{{ $obat->id }}" data-harga="{{ $obat->harga }}">
+                        <input class="form-check-input obat-checkbox" type="checkbox" name="obat_id[]" value="{{ $obat->id }}"
+                            id="obat{{ $obat->id }}" data-harga="{{ $obat->harga }}"
+                            {{ $periksa->detailPeriksa->where('id_obat', $obat->id)->count() ? 'checked' : '' }}>
                         <label class="form-check-label" for="obat{{ $obat->id }}">
                             {{ $obat->nama_obat }} - Rp{{ number_format($obat->harga, 0, ',', '.') }}
                         </label>
@@ -35,15 +45,16 @@
                 <input type="hidden" name="biaya_periksa" id="hidden_biaya">
             </div>
         </div>
+
         <div class="card-footer">
-            <button class="btn btn-primary" type="submit">Simpan</button>
-            <a href="{{ route('dokter.periksa.index') }}" class="btn btn-secondary">Batal</a>
+            <button class="btn btn-primary" type="submit">Perbarui</button>
+            <a href="{{ route('dokter.periksa.index') }}" class="btn btn-secondary">Kembali</a>
         </div>
     </div>
 </form>
 @endsection
 
-@push('js')
+@section('js')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const hargaTetap = 75000;
@@ -68,7 +79,7 @@
             cb.addEventListener('change', updateHarga);
         });
 
-        updateHarga(); // Jalankan saat halaman pertama kali terbuka
+        updateHarga(); // run on load
     });
 </script>
-@endpush
+@endsection
